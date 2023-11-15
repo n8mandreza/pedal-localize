@@ -1,0 +1,41 @@
+{
+  "dependencies": {
+    "@create-figma-plugin/ui": "^3.0.2",
+    "@create-figma-plugin/utilities": "^3.0.2",
+    "lucide-preact": "^0.291.0",
+    "preact": "^10.18.1"
+  },
+  "devDependencies": {
+    "@create-figma-plugin/build": "^3.0.2",
+    "@create-figma-plugin/tsconfig": "^3.0.2",
+    "@figma/plugin-typings": "1.79.0",
+    "concurrently": ">=8",
+    "tailwindcss": ">=3",
+    "typescript": ">=4"
+  },
+  "scripts": {
+    "build": "npm run build:css && npm run build:js",
+    "build:css": "tailwindcss --input ./src/input.css --output ./src/output.css",
+    "build:js": "build-figma-plugin --typecheck --minify",
+    "watch": "npm run build:css && concurrently npm:watch:css npm:watch:js",
+    "watch:css": "tailwindcss --input ./src/input.css --output ./src/output.css --watch",
+    "watch:js": "build-figma-plugin --typecheck --watch"
+  },
+  "figma-plugin": {
+    "editorType": [
+      "figma"
+    ],
+    "id": "1300335041976603472",
+    "name": "Pedal Localize",
+    "main": "src/main.ts",
+    "ui": "src/ui.tsx",
+    "networkAccess": {
+      "allowedDomains": [
+        "https://turo.tandemvault.com",
+        "https://do4gli16eu802.cloudfront.net",
+        "https://fathomless-harbor-11420.herokuapp.com"
+      ],
+      "reasoning": "This plugin queries turo.tandemvault.com for images, served via cloudfront. Heroku provides appropriate CORS headers."
+    }
+  }
+}
